@@ -1,0 +1,126 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Fastlane will automatically update itself
+update_fastlane
+
+default_platform(:ios)
+
+# Implementation lanes.
+platform :ios do
+
+###############################################################################
+# App Variables
+###############################################################################
+
+identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+team_name = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_name)
+team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
+apple_id = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
+scheme = "Memory" # Schema of the main app
+xcodeproj = "Memory.xcodeproj" # xCode Project name
+test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
+
+###############################################################################
+# - Release
+###############################################################################
+  desc "This Lane run tests, increase build, take screenshots,
+  build for deployment, upload to app store."
+  lane :release_production do
+    test
+    increase_build
+    screenshots
+    build
+    deploy
+  end
+
+###############################################################################
+# - Tests
+###############################################################################
+  desc "This Lane run tests in most important devices."
+  lane :test do
+    # This will check that the UI and Unit test are working.
+    run_tests(
+      project: xcodeproj,
+      devices: test_devices,
+      scheme: scheme)
+    end
+
+###############################################################################
+# - GIT
+###############################################################################
+  desc "This Lane will increase build number and push to master."
+  lane :increase_build do
+    # This will incremente the build number based on the last build.
+    increment_build_number(
+      build_number:
+      latest_testflight_build_number(
+        app_identifier: identifier,
+        team_id: team_id,
+        username: apple_id) + 1)
+
+    # Commit the version bump
+    commit_version_bump(xcodeproj: xcodeproj)
+
+    # Add a git tag for this build. This will automatically
+    # use an appropriate git tag name
+    add_git_tag
+
+    # Push the new commit and tag back to your git remote
+    push_to_git_remote
+  end
+
+###############################################################################
+# - Build
+###############################################################################
+  desc "This Lane will build the app for delivery."
+  lane :build do
+    # invokes cert.
+    get_certificates(
+      team_name: team_name,
+      username: apple_id)
+
+    # invokes sigh.
+    get_provisioning_profile(
+      app_identifier: identifier,
+      team_name: team_name,
+      username: apple_id)
+
+    # This will compile the app.
+    build_app(
+      scheme: scheme,
+      project: xcodeproj,
+      include_bitcode: true)
+  end
+
+###############################################################################
+# - Screenshots
+###############################################################################
+  desc "This Lane will take screenshots and add frames."
+  lane :screenshots do
+    # Upload screenshots to the store.
+    capture_screenshots(scheme: "MemoryScreenshots")
+    frame_screenshots(white: true)
+  end
+
+###############################################################################
+# - App Store
+###############################################################################
+  desc "This Lane will upload app to the app store."
+  lane :deploy do
+    # Deliver to app store
+      deliver(
+        app_identifier: identifier,
+        username: apple_id)
+  end
+
+end

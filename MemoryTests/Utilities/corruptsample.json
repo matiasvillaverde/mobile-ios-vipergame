@@ -1,0 +1,13 @@
+{
+    "späti": [{
+                  "name":"Maradona",
+                  "age":"61",
+                  "image":"https://img.fifa.com/image/upload/t_l4/xy1q9lcd5jj4nlgmua9m.jpg"
+                  },
+                  {
+                  "name":"Messi",
+                  "age":"32",
+                  "image":"https://media.gettyimages.com/photos/maximiliano-meza-of-argentina-runs-with-the-ball-during-the-friendly-picture-id938946118?s=612x612"
+                  }]
+    
+}

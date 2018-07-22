@@ -1,0 +1,137 @@
+# For more information about each property, visit the GitHub documentation:
+# https://github.com/krausefx/deliver
+#
+# A list of available language codes can be found here:
+# https://github.com/krausefx/deliver#available-language-codes
+
+###############################################################################
+# App Variables
+###############################################################################
+identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+team_id = CredentialsManager::AppfileConfig.try_fetch_value(:team_id)
+team_name = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_name)
+username = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
+target = "Memory" # Target name
+
+###############################################################################
+# App Metadata
+###############################################################################
+
+app_version("1.0")
+
+app_icon "./Memory/Assets.xcassets/AppIcon.appiconset/ItunesArtwork@2x.png"
+
+name({
+ "en-US" => "Memory",
+ "de-DE" => "Memory"
+})
+
+description({
+ 'en-US' => "Great game to find Technology logos in a concentration game.",
+ 'de-DE' => "Tolles Spiel um deine Lieblingstechnologie in einem Konzentrationsspiel zu finden."
+})
+
+keywords(
+  "en-US" => "apple,swift,go,linux,memo",
+  "de-DE" => "apple,swift,go,Erinnerung"
+)
+
+promotional_text(
+  "en-US" => "Great game to practice your concentration!",
+  "de-DE" => "Tolles Spiel um deine Konzentration zu üben!"
+)
+
+copyright("#{Time.now.year} Matias Villaverde")
+
+###############################################################################
+# Replace information with your Support URL.
+###############################################################################
+support_url(
+  "en-US" => "https://www.matiasvillaverde.com/",
+  "de-DE" => "https://www.matiasvillaverde.com/")
+
+###############################################################################
+# Replace information with your Marketing URL.
+###############################################################################
+marketing_url(
+  "en-US" => "https://www.matiasvillaverde.com/",
+  "de-DE" => "https://www.matiasvillaverde.com/")
+
+###############################################################################
+# Replace information with your Privacy URL.
+###############################################################################
+privacy_url(
+  "en-US" => "https://www.matiasvillaverde.com/",
+  "de-DE" => "https://www.matiasvillaverde.com/")
+
+###############################################################################
+# Replace information with your data.
+###############################################################################
+app_review_information({
+ first_name: "Matias",
+ last_name: "Villaverde",
+ phone_number: "+4915129488263",
+ email_address: "contact@matiasvillaverde.com"
+})
+
+###############################################################################
+# Replace information with your data.
+###############################################################################
+trade_representative_contact_information(
+  first_name: "Matias",
+  last_name: "Villaverde",
+  address_line1: "Fake Street 123",
+  address_line2: "",
+  address_line3: "",
+  city_name: "Berlin",
+  state: "",
+  country: "Germany",
+  postal_code: "123456",
+  phone_number: "+4915129488263",
+  email_address: "contact@matiasvillaverde.com"
+)
+
+submission_information({
+      add_id_info_limits_tracking: true,
+      add_id_info_serves_ads: true,
+      add_id_info_tracks_action: true,
+      add_id_info_tracks_install: true,
+      add_id_info_uses_idfa: true,
+      content_rights_has_rights: true,
+      content_rights_contains_third_party_content: true,
+      export_compliance_platform: 'ios',
+      export_compliance_compliance_required: false,
+      export_compliance_encryption_updated: false,
+      export_compliance_app_type: nil,
+      export_compliance_uses_encryption: false,
+      export_compliance_is_exempt: false,
+      export_compliance_contains_third_party_cryptography: false,
+      export_compliance_contains_proprietary_cryptography: false,
+      export_compliance_available_on_french_store: false
+    });
+
+primary_category "Games"
+price_tier 0
+app_rating_config_path
+
+# This folder has to include one folder for each language
+# More information about automatic screenshot upload:
+# https://github.com/KrauseFx/deliver#upload-screenshots-to-itunes-connect
+screenshots_path "./fastlane/screenshots"
+overwrite_screenshots(true)
+
+###############################################################################
+# Submit
+###############################################################################
+automatic_release(true)
+force(true)
+submit_for_review(true)
+
+###############################################################################
+# Building
+###############################################################################
+
+ipa do
+  # Tell 'Deliver' where it can find the finished ipa file
+   "#{target}.ipa"
+end

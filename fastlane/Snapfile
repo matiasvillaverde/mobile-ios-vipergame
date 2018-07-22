@@ -1,0 +1,22 @@
+# A list of devices you want to take the screenshots from
+devices([
+  "iPhone X", "iPad Pro (12.9-inch) (2nd generation)", "iPhone 8 Plus"
+])
+
+# Languages that the app support.
+languages([
+  "en-US",
+  "de-DE"
+])
+
+# The name of the scheme which contains the UI Tests
+scheme("MemoryScreenshots")
+
+# Where should the resulting screenshots be stored?
+output_directory("./fastlane/screenshots")
+
+# remove the '#' to clear all previously generated screenshots before creating new ones
+clear_previous_screenshots(true)
+
+# For more information about all available options run
+# fastlane action snapshot

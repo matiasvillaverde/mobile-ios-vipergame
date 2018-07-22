@@ -1,0 +1,26 @@
+# System
+.DS_STORE
+
+# xCode
+Memory.xcodeproj/xcuserdata/
+Memory.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Gem
+*.lock
+
+# Certificates
+*.cer
+*.mobileprovision
+
+# Build
+*.zip
+*.ipa
+
+# Screenshots
+fastlane/screenshots/*.html
+fastlane/screenshots/en-US/*.png
+fastlane/screenshots/en-GB/*.png
+
+# Report
+fastlane/report.xml
+fastlane/test_output/

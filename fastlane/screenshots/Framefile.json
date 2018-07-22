@@ -1,0 +1,40 @@
+{
+  "default": {
+
+    "stack_title" : true,
+
+    "show_complete_frame": false,
+
+    "title": {
+      "color": "#ffffff"
+    },
+
+    "background": "./background.jpg",
+    "padding": 90
+  },
+
+
+  "data": [
+    {
+      "filter": "3screen",
+      "keyword": {
+        "color": "#ffffff",
+        "font_scale_factor" : 0.2
+      }
+    },
+    {
+      "filter": "4screen",
+      "keyword": {
+        "color": "#ffffff",
+        "font_scale_factor" : 0.2
+      }
+    },
+    {
+      "filter": "5screen",
+      "keyword": {
+        "color": "#ffffff",
+        "font_scale_factor" : 0.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/*
+ GameLocalized.strings
+ Memory
+ 
+ Created by Matias Villaverde on 16.08.18.
+ Copyright © 2018 Matias Villaverde. All rights reserved.
+ */
+
+// Game Module
+"game_start" = "Start! 🚀";
+"game_win" = "You win! 🏆";
+"game_match" = "Match! 🎉";
+"game_tap_card" = "Tap a card!";
