@@ -10,6 +10,11 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+INFO_PLIST_MEMORY = '../Memory/Info.plist'
+INFO_PLIST_MEMORY_BETA = '../Memory/MemoryBeta_Info.plist'
+API_TOKEN = '3cb04e2fbf10fe15ed7a36a6b65599444e4f362d'
+BUILD_SECRET = '8b3c7d5a15cc235e0d1d5a324e0f82bca9cd2ab3637833181169a2d190adcebf'
+
 # Fastlane will automatically update itself
 update_fastlane
 
@@ -124,3 +129,44 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
   end
 
 end
+
+###############################################################################
+# - Memory crashlytics
+###############################################################################
+  desc "This lane will upload app to crashlytics."
+  lane :memory do
+    # Deliver to fabric
+    version = get_version_number(target: 'Memory')
+    fabric(
+      app_identifier: "com.matiasvillaverde.Memory",
+      version: version,
+      info_plist: INFO_PLIST_MEMORY,
+      scheme: 'Memory',
+    )
+  end
+
+###############################################################################
+# - MemoryBeta crashlytics
+###############################################################################
+  desc "This lane will upload app to crashlytics."
+  lane :memory_beta do
+    # Deliver to fabric
+    version = get_version_number(target: 'MemoryBeta')
+    fabric(
+      version: version,
+      info_plist: INFO_PLIST_MEMORY_BETA,
+      scheme: 'MemoryBeta',
+    )
+  end
+
+  private_lane :fabric do |options|
+    build_app(
+      scheme: options[:scheme],
+      export_method: "ad-hoc"
+    )
+
+    crashlytics(
+      api_token: API_TOKEN,
+      build_secret: BUILD_SECRET
+    )
+  end
