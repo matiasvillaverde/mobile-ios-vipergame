@@ -15,6 +15,19 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
+### memory
+```
+fastlane memory
+```
+This lane will upload app to crashlytics.
+### memory_beta
+```
+fastlane memory_beta
+```
+This lane will upload app to crashlytics.
+
+----
+
 ## iOS
 ### ios release_production
 ```

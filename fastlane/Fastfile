@@ -10,8 +10,13 @@
 #     https://docs.fastlane.tools/plugins/available-plugins
 #
 
+INFO_PLIST_MEMORY = '../Memory/Info.plist'
+INFO_PLIST_MEMORY_BETA = '../Memory/MemoryBeta_Info.plist'
+API_TOKEN = '3cb04e2fbf10fe15ed7a36a6b65599444e4f362d'
+BUILD_SECRET = '8b3c7d5a15cc235e0d1d5a324e0f82bca9cd2ab3637833181169a2d190adcebf'
+
 # Fastlane will automatically update itself
-update_fastlane
+# update_fastlane
 
 default_platform(:ios)
 
@@ -27,7 +32,7 @@ team_name = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_name)
 team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
 apple_id = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
 scheme = "Memory" # Schema of the main app
-xcodeproj = "Memory.xcodeproj" # xCode Project name
+xcworkspace = "Memory.xcworkspace" # xCode Project name
 test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
 
 ###############################################################################
@@ -50,7 +55,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
   lane :test do
     # This will check that the UI and Unit test are working.
     run_tests(
-      project: xcodeproj,
+      workspace: xcworkspace,
       devices: test_devices,
       scheme: scheme)
     end
@@ -69,7 +74,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
         username: apple_id) + 1)
 
     # Commit the version bump
-    commit_version_bump(xcodeproj: xcodeproj)
+    commit_version_bump(workspace: xcworkspace)
 
     # Add a git tag for this build. This will automatically
     # use an appropriate git tag name
@@ -98,7 +103,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
     # This will compile the app.
     build_app(
       scheme: scheme,
-      project: xcodeproj,
+      workspace: xcworkspace,
       include_bitcode: true)
   end
 
@@ -124,3 +129,44 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
   end
 
 end
+
+###############################################################################
+# - Memory crashlytics
+###############################################################################
+  desc "This lane will upload app to crashlytics."
+  lane :memory do
+    # Deliver to fabric
+    version = get_version_number(target: 'Memory')
+    fabric(
+      app_identifier: "com.matiasvillaverde.Memory",
+      version: version,
+      info_plist: INFO_PLIST_MEMORY,
+      scheme: 'Memory',
+    )
+  end
+
+###############################################################################
+# - MemoryBeta crashlytics
+###############################################################################
+  desc "This lane will upload app to crashlytics."
+  lane :memory_beta do
+    # Deliver to fabric
+    version = get_version_number(target: 'MemoryBeta')
+    fabric(
+      version: version,
+      info_plist: INFO_PLIST_MEMORY_BETA,
+      scheme: 'MemoryBeta',
+    )
+  end
+
+  private_lane :fabric do |options|
+    build_app(
+      scheme: options[:scheme],
+      export_method: "ad-hoc"
+    )
+
+    crashlytics(
+      api_token: API_TOKEN,
+      build_secret: BUILD_SECRET
+    )
+  end
