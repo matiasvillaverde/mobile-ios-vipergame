@@ -16,7 +16,7 @@ API_TOKEN = '3cb04e2fbf10fe15ed7a36a6b65599444e4f362d'
 BUILD_SECRET = '8b3c7d5a15cc235e0d1d5a324e0f82bca9cd2ab3637833181169a2d190adcebf'
 
 # Fastlane will automatically update itself
-update_fastlane
+# update_fastlane
 
 default_platform(:ios)
 
@@ -32,7 +32,7 @@ team_name = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_name)
 team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
 apple_id = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
 scheme = "Memory" # Schema of the main app
-xcodeproj = "Memory.xcodeproj" # xCode Project name
+xcworkspace = "Memory.xcworkspace" # xCode Project name
 test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
 
 ###############################################################################
