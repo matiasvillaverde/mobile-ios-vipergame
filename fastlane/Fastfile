@@ -55,7 +55,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
   lane :test do
     # This will check that the UI and Unit test are working.
     run_tests(
-      project: xcodeproj,
+      workspace: xcworkspace,
       devices: test_devices,
       scheme: scheme)
     end
@@ -74,7 +74,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
         username: apple_id) + 1)
 
     # Commit the version bump
-    commit_version_bump(xcodeproj: xcodeproj)
+    commit_version_bump(workspace: xcworkspace)
 
     # Add a git tag for this build. This will automatically
     # use an appropriate git tag name
@@ -103,7 +103,7 @@ test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
     # This will compile the app.
     build_app(
       scheme: scheme,
-      project: xcodeproj,
+      workspace: xcworkspace,
       include_bitcode: true)
   end
 
