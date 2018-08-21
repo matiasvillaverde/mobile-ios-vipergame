@@ -7,4 +7,4 @@ env:
 xcode_project: Memory.xcodeproj
 xcode_scheme: MemoryTests
 script:
-  - fastlane testg
+  - fastlane test
