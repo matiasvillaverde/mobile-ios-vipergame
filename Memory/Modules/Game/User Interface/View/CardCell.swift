@@ -86,10 +86,10 @@ extension CardCell {
 
     private func flip() {
         if shown {
-            bringSubview(toFront: frontImageView)
+            bringSubviewToFront(frontImageView)
             backImageView.isHidden = true
         } else {
-            bringSubview(toFront: backImageView)
+            bringSubviewToFront(backImageView)
             frontImageView.isHidden = true
         }
     }
