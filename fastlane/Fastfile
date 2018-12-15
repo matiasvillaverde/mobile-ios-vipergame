@@ -28,7 +28,7 @@ team_id = CredentialsManager::AppfileConfig.try_fetch_value(:itc_team_id)
 apple_id = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
 scheme = "Memory" # Schema of the main app
 xcodeproj = "Memory.xcodeproj" # xCode Project name
-test_devices = ["iPhone X", "iPad Pro (12.9-inch) (2nd generation)"]
+test_devices = ["iPhone XS", "iPad Pro (12.9-inch) (3nd generation)"]
 
 ###############################################################################
 # - Release

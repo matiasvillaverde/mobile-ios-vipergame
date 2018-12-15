@@ -1,5 +1,5 @@
 # Viper Memory Game
-> Simple memory game written in Swift 4 using VIPER Architecture.
+> Simple memory game written in Swift 4.2 using VIPER Architecture.
 
 [![Swift Version][swift-image]][swift-url]
 [![Build Status](https://travis-ci.org/matiasvillaverde/mobile-ios-vipergame.svg?branch=master)](https://travis-ci.org/matiasvillaverde/mobile-ios-vipergame)
@@ -24,7 +24,7 @@ Additionally, the game serves as an example of code with robust Unit Test covera
 ## Requirements
 
 - iOS 10.0+
-- Xcode 9.0+
+- Xcode 10.0+
 
 ## VIPER
 
@@ -63,7 +63,7 @@ Matias Villaverde – [@matiasvillaverde](https://medium.com/@matiasvillaverde)
 
 Licensed under the **MIT** license. See ``LICENSE`` for more information.
 
-[swift-image]:https://img.shields.io/badge/swift-4.1-orange.svg
+[swift-image]:https://img.shields.io/badge/swift-4.2-orange.svg
 [swift-url]: https://swift.org/
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg
 [license-url]: LICENSE
