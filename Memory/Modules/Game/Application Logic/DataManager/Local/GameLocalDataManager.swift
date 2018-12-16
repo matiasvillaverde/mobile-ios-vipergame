@@ -52,24 +52,33 @@ extension GameLocalDataManager {
         var output = [Content]()
 
         // Iterates the array
-        json.forEach { jsonPlayers in
+        json.forEach { contentJson in
 
             guard output.count < amount else { return }
 
-            guard
-
-                let image = jsonPlayers["image"] as? String,
-                let imageURL = URL(string: "http://www.matiasvillaverde.com/mobile-ios-vipergame/\(image).png"),
-                let description = jsonPlayers["description"] as? String
-                else { fatalError("Developer: Wrong format of content.") }
-
-            let player = Logo(name: image.capitalized, description: description, imageURL: imageURL)
-
-            output.append(player)
+            let content = map(json: contentJson)
+            output.append(content)
 
         }
 
         return output
+    }
+
+    func map(json: NSDictionary) -> Logo {
+
+        let keyImage = "image"
+        let keyImageURL = "http://matiasvillaverde.com/mobile-ios-vipergame/"
+        let keyImageURLExtension = ".png"
+        let keyDescription = "description"
+
+        guard
+            let image = json[keyImage] as? String,
+            let imageURL = URL(string: keyImageURL + image + keyImageURLExtension),
+            let description = json[keyDescription] as? String
+            else { fatalError("Developer: Wrong format of content.") }
+
+        return Logo(name: image.capitalized, description: description, imageURL: imageURL)
+
     }
 
 }
