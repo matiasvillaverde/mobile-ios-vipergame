@@ -37,17 +37,14 @@ final class GameLocalDataManager: GameLocalDataManagerInputProtocol {
     func map(json: NSDictionary) -> Logo {
 
         let keyImage = "image"
-        let keyImageURL = "http://matiasvillaverde.com/mobile-ios-vipergame/"
-        let keyImageURLExtension = ".png"
         let keyDescription = "description"
 
         guard
             let image = json[keyImage] as? String,
-            let imageURL = URL(string: keyImageURL + image + keyImageURLExtension),
             let description = json[keyDescription] as? String
             else { fatalError("Developer: Wrong format of content.") }
 
-        return Logo(name: image.capitalized, description: description, imageURL: imageURL)
+        return Logo(name: image.capitalized, description: description, image: image)
 
     }
 

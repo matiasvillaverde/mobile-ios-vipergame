@@ -25,7 +25,7 @@ extension Card {
     }
 
     func isMatch(of card: Card) -> Bool {
-        return card.content.imageURL == content.imageURL
+        return card.content.image == content.image
     }
 
 }

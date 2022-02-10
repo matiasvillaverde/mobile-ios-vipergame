@@ -144,7 +144,7 @@ extension GamePresenterTests {
         }
 
         func index(for card: Card) -> Int? {
-            if card.content.imageURL == URL(string: "http://www.google.com/")! {
+            if card.content.image == "swift" {
                 return 1
             }
             return nil

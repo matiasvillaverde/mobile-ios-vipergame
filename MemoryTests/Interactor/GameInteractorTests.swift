@@ -127,9 +127,11 @@ extension GameInteractorTests {
             var output = [Content]()
 
             for _ in 0...amount {
-                let player = Logo(name: "swift",
+                let player = Logo(
+                    name: "swift",
                                   description: "programming language",
-                                  imageURL: URL(string: "http://www.matiasvillaverde.com/mobile-ios-vipergame/swift.png")!)
+                                  image: "swift"
+                )
                 output.append(player)
             }
 
@@ -144,3 +146,4 @@ extension GameInteractorTests {
     }
 
 }
+

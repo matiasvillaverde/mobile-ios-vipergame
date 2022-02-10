@@ -37,9 +37,7 @@ extension CardCell {
 
     private func addImage() {
         guard let card = card else { return }
-        UIImage.download(image: card.content.imageURL, completion: { [weak self] (image) in
-            self?.frontImageView.image = image
-        })
+        self.frontImageView.image = UIImage(named: card.content.image)
     }
 
 }

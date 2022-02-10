@@ -5,7 +5,7 @@ protocol Content {
 
     var name: String { get set }
     var description: String { get set }
-    var imageURL: URL { get set }
+    var image: String { get set }
 
     func displayName() -> String
 

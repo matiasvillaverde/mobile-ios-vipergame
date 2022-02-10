@@ -5,7 +5,7 @@ struct Logo: Content {
 
     var name: String
     var description: String
-    var imageURL: URL
+    var image: String
 
     func displayName() -> String {
         return "\(name.capitalized)"
